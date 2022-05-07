@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SureCar</title>
+        <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+    </head>
+    <body>
+
+        <section id="header">
+            <a href="#"> {% load static %} <img src="{% static "img/logo.png" %}" width="250" height="75" class="logo" alt=""></a>
+
+            <div>
+                <ul id="navbar">
+                    <li><a class="active" href="/home">Home</a></li>
+                    <li><a href="/browse">Browse Cars</a></li>
+                    <li><a href="/sell">Sell Your Car</a></li>
+                    <li><a href="/smartrecommender">Smart Recommender</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/signout">Sign Out</a></li>
+                    {% else %}
+                    <li><a href="/signin">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </section>
+
+        <section id="hero">
+            <h1>Welcome to SureCar</h1>
+            <h3>First Bangladeshi car marketplace with smart recommendation system</h3>
+            
+            
+            {% if user.is_authenticated %}
+            <h1>Hello {{ fname }}</h1>
+            <a class="homebutton" href="/signout">Sign Out</a>
+            {% else %}
+            <a class="homebutton" href="/signin">Login</a>
+            <a class="homebutton" href="/signup">Sign Up</a>
+            <a class="homebutton" href="/browse">Browse</a>
+            {% endif %}
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SureCar</title>
+        <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+    </head>
+    <body>
+
+        <section id="header">
+            <a href="#"> {% load static %} <img src="{% static "img/logo.png" %}" width="250" height="75" class="logo" alt=""></a>
+
+            <div>
+                <ul id="navbar">
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/browse">Browse Cars</a></li>
+                    <li><a href="/sell">Sell Your Car</a></li>
+                    <li><a href="/smartrecommender">Smart Recommender</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/signout">Sign Out</a></li>
+                    {% else %}
+                    <li><a href="/signin">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </section>
+
+        <section id="carbody">
+            <div class="cardetails"> 
+                <div class="row"> 
+                    <div class="columncar"> 
+                        <h2>{{Car.name}}</h2>
+                        <img src="{{Car.image.url}}" width="80%" height="40%" alt="">
+                        <p1>Seller Name: {{Seller.first_name}} {{Seller.last_name}}</p1>
+                        <p1>Seller Email: {{Seller.email}}</p1>
+                    </div>
+                    <div class="columncar"> 
+                        <h9>Car Details</h9>
+                        <p1>Year: {{Car.year}}</p1>
+                        <p1>Price: {{Car.price}}</p1>
+                        <p1>Km Driven: {{Car.km_driven}}</p1>
+                        <p1>Fuel Type: {{Car.fuel_type}}</p1>
+                        <p1>Seller Type: {{Car.seller_type}}</p1>
+                        <p1>Transmission: {{Car.transmission}}</p1>
+                        <p1>Owner: {{Car.owner}}</p1>
+                        <p1>Mileage: {{Car.mileage}}</p1>
+                        <p1>Engine: {{Car.engine}}</p1>
+                        <p1>Seats: {{Car.seats}}</p1>
+                        <p1>Running Cost: {{Car.running_cost}}</p1>
+                    </div>
+                </div>
+            </div>
+        </section>

@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SureCar</title>
+        <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    </head>
+    <body>
+
+        <section id="header">
+            <a href="#"> {% load static %} <img src="{% static "img/logo.png" %}" width="250" height="75" class="logo" alt=""></a>
+
+            <div>
+                <ul id="navbar">
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/browse">Browse Cars</a></li>
+                    <li><a href="/sell">Sell Your Car</a></li>
+                    <li><a href="/smartrecommender">Smart Recommender</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/signout">Sign Out</a></li>
+                    {% else %}
+                    <li><a href="/signin">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </section>
+
+        <section id="recommendationgraph">
+            <div id="graphcontainer" class="graphcontainer" style="width: 50%;">
+                <h9>Smart Recommender Feedback</h9>
+                <canvas id="bar-chart"></canvas>
+                <h9>Smart Recommender Bias</h9>
+                <p1>Total Recommendations: {{totalrecommendationscount}}</p1>
+                <p1>Distinct Recommendations: {{distinctrecommendationscount}}</p1>
+            </div>
+
+            </section>
+    
+            <script>
+                
+                myvalues = {{graphdata|safe}};
+                const backgroundcolors = [];
+    
+                for(i=0;i<myvalues.length;i++){
+                    if(myvalues[i]<=0){
+                        backgroundcolors.push('DarkCyan')
+                    }
+                    if(myvalues[i]>0){
+                        backgroundcolors.push('DarkCyan')
+                    }
+                }
+    
+                var config = {
+                    type: 'bar',
+                    data: {
+                        datasets: [{
+                            data: {{graphdata|safe}},
+                            backgroundColor: backgroundcolors,
+                            label: 'Average percentage difference of wanted car against recommendations'
+                        }],
+                        labels: ['Year','Price','Km Driven', 'Mileage', 'Engine']
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        responsive: true
+                    }
+                };
+    
+                window.onload = function() {
+                    var ctx = document.getElementById('bar-chart').getContext('2d');
+                    window.myPie = new Chart(ctx, config);
+                }
+    
+            </script>
+
+        </body>

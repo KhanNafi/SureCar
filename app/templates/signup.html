@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sign Up</title>
+        <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+    </head>
+    <body>
+
+        <section id="header">
+            <a href="#"> {% load static %} <img src="{% static "img/logo.png" %}" width="250" height="75" class="logo" alt=""></a>
+
+            <div>
+                <ul id="navbar">
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/browse">Browse Cars</a></li> 
+                    <li><a href="/sell">Sell Your Car</a></li>
+                    <li><a href="/smartrecommender">Smart Recommender</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/signin">Login</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="signupbody">
+            <h1>Sign Up</h1>
+            
+            <form action="signup" method="post">
+                {% csrf_token %}
+                <input type="text" id="username" name="username" placeholder="Username"><br>
+                <input type="text" id="first_name" name="first_name" placeholder="First Name"><br>
+                <input type="text" id="last_name" name="last_name" placeholder="Last Name"><br>
+                <input type="email" id="email" name="email" placeholder="Email"><br>
+                <input type="password" id="password" name="password" placeholder="Password"><br>
+                <input type="submit" value="Register">
+            </form>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SureCar</title>
+        <link id="sheet-theme" rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+    </head>
+    <body>
+
+        <section id="header">
+            <a href="#"> {% load static %} <img src="{% static "img/logo.png" %}" width="250" height="75" class="logo" alt=""></a>
+
+            <div>
+                <ul id="navbar">
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/browse">Browse Cars</a></li>
+                    <li><a class="active" href="/sell">Sell Your Car</a></li>
+                    <li><a href="/smartrecommender">Smart Recommender</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="/signout">Sign Out</a></li>
+                    {% else %}
+                    <li><a href="/signin">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </section>
+
+        <section id="sellbody">
+            <h8>Sell Your Car</h8>
+            
+            <form action="sell" method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="column">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="e.g. 2017"><br>
+                        
+                        <label for="year">Year</label>
+                        <input type="text" id="year" name="year" placeholder="e.g. 2017"><br>
+
+                        <label for="price">Price</label>
+                        <input type="number" id="price" name="price" placeholder="e.g. 2000000"><br>
+
+                        <label for="km_driven">KM Driven</label>
+                        <input type="number" id="km_driven" name="km_driven" placeholder="e.g. 145500"><br>
+
+                        <label for="mileage">Mileage (kmpl)</label>
+                        <input type="number" id="mileage" name="mileage" placeholder="e.g. 17.7" step="0.01" min="0" max="100"><br>
+        
+                        <label for="engine">Engine (CC)</label>
+                        <input type="number" id="engine" name="engine" placeholder="e.g. 1500"><br>
+
+                    </div>
+                    <div class="column">
+                        <label for="transmission">Transmission</label>
+                        <select id="transmission" Name="transmission">
+                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                        </select>
+
+                        <label for="fueltype">Fuel Type</label>
+                        <select id="fueltype" Name="fueltype">
+                            <option value="Diesel">Diesel</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="LPG">LPG</option>
+                            <option value="CNG">CNG</option>
+                        </select>
+
+                        <label for="sellertype">Seller Type</label>
+                        <select id="sellertype" Name="sellertype">
+                            <option value="Individual">Individual</option>
+                            <option value="Dealer">Dealer</option>
+                            <option value="Trustmark Dealer">Trustmark Dealer</option>
+                        </select>
+        
+                        <label for="owner">Owner</label>
+                        <select id="owner" Name="owner">
+                            <option value="First Owner">First Owner</option>
+                            <option value="Second Owner">Second Owner</option>
+                            <option value="Third Owner">Third Owner</option>
+                            <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+                            <option value="Test Drive Car">Test Drive Car</option>
+                        </select>
+        
+                        
+        
+                        <label for="seats">Seats</label>
+                        <select id="seats" Name="seats">
+                            <option value=2>2</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=6>6</option>
+                            <option value=7>7</option>
+                            <option value=8>8</option>
+                            <option value=9>9</option>
+                            <option value=10>10</option>
+                            <option value=14>14</option>
+                        </select>
+
+                        <label for="pictureupload">Upload Picture</label>
+                        <input type="file" id="pictureupload" name="pictureupload">
+                    </div>
+                </div>
+                
+                <input type="submit" value="Post">
+            </form>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+</html>
